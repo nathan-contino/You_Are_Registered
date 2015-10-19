@@ -18,7 +18,7 @@ Problem this solves: our current, terrible registrar site. It also allows course
 How it meets minimum project specifications: allows students to sign in, select classes, check conflicts, view holds, etc.
 How our project is unique/creative: For some reason, students seem really interested in writing new versions of CDCS but not in revamping the entire system that causes CDCS to be necessary. We hope to fix that.
 
-  *Create: Users can create a profile, including pictures, registered class listings, and prior semester schedules
-  *Read: Users can access information regarding class scheduling, professors, and even major requirements
-  *Update: Users can add/drop registered classes and bookmark "interested classes"
-  *Destroy: Allow users to delete their own data and accounts.
+  * Create: Users can create a profile, including pictures, registered class listings, and prior semester schedules
+  * Read: Users can access information regarding class scheduling, professors, and even major requirements
+  * Update: Users can add/drop registered classes and bookmark "interested classes"
+  * Destroy: Allow users to delete their own data and accounts.
