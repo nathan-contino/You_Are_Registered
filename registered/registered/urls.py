@@ -18,4 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+     url(r'^auth/create_account.html','auth.views.create_user', name='create_user'),
+     url(r'^auth/login.html','auth.views.login_user', name='login'),
 ]
