@@ -20,4 +20,10 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
      url(r'^auth/create_account.html','auth.views.create_user', name='create_user'),
      url(r'^auth/login.html','auth.views.login_user', name='login'),
+     url(r'^auth/loggedin.html', 'auth.views.loginpage'),
+     url(r'^auth/loggedout.html', 'auth.views.logout_user'),
+     url(r'^auth/createsuccess.html', 'auth.views.createsuccess'),
+     url(r'^auth/invalid.html', 'auth.views.invalidusername'),
+     url(r'^auth/nologin.html', 'auth.views.logout_user'),
+     url(r'^','auth.views.login_user'),
 ]
