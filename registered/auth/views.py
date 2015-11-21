@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import CreateUserForm, LoginForm
+from .forms import CreateUserForm, LoginForm, RegistrationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -59,8 +59,20 @@ def login_user(request):
 
 def loginpage(request):
     if request.user is not None:
-        return render_to_response('loggedin.html',
-            {'full_name': request.user.username})
+        if request.method == 'GET':
+            form = RegistrationForm(initial={"csc210": request.user.is_staff})
+
+        else:
+            form = RegistrationForm(request.POST) # Bind data from request.POST into a PostForm
+
+            if form.is_valid():
+                takingcourse = form.cleaned_data['csc210']
+                request.user.is_staff= takingcourse
+                request.user.save()
+
+        return render(request, 'loggedin.html',
+            {'full_name': request.user.username,
+            'form': form})
     return render_to_response('nologin.html')
 
 

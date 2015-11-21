@@ -1,7 +1,13 @@
 <body>
-<p>My Content</p>    
+<p>My Content</p>
 	<div>
 		{{full_name}}, you are logged in! Welcome!
 	</div>
 	<a href="/auth/loggedout.html">logout</a>
+	<h2> Pick your classes! </h2>
+	<form action='/auth/loggedin.html' method='post'>
+	{% csrf_token %}
+	{{ form.as_p }}
+	<input type='submit' value='Submit' />
+	</form>
 </body>
