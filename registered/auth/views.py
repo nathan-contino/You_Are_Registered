@@ -61,6 +61,7 @@ def loginpage(request):
     if request.user is not None:
         if request.method == 'GET':
             form = RegistrationForm(initial={"csc210": request.user.is_staff})
+            addMessage = False
 
         else:
             form = RegistrationForm(request.POST) # Bind data from request.POST into a PostForm
@@ -69,10 +70,12 @@ def loginpage(request):
                 takingcourse = form.cleaned_data['csc210']
                 request.user.is_staff= takingcourse
                 request.user.save()
+                addMessage = True
 
         return render(request, 'loggedin.html',
             {'full_name': request.user.username,
-            'form': form})
+            'form': form,
+            'addMessage': addMessage})
     return render_to_response('nologin.html')
 
 
