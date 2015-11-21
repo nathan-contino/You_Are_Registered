@@ -33,25 +33,28 @@ def invalidusername(request):
     return render(request, 'invalid.html')
 
 def login_user(request):
-    if request.method == 'GET':
-        form = LoginForm()
+    if len(request.user.username) > 0:
+        return HttpResponseRedirect('/auth/loggedin.html')
     else:
-        form = LoginForm(request.POST) # Bind data from request.POST into a PostForm
+        if request.method == 'GET':
+            form = LoginForm()
+        else:
+            form = LoginForm(request.POST) # Bind data from request.POST into a PostForm
 
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                if user.is_active:
-                    login(request,user)
-                    return HttpResponseRedirect('/auth/loggedin.html')
+            if form.is_valid():
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password']
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    if user.is_active:
+                        login(request,user)
+                        return HttpResponseRedirect('/auth/loggedin.html')
 
-                    # Redirect to a success page.
+                        # Redirect to a success page.
 
-    return render(request, 'login.html', {
-        'form': form,
-    })
+        return render(request, 'login.html', {
+            'form': form,
+            })
 
 
 def loginpage(request):
