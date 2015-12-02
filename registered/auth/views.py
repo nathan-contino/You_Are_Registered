@@ -85,3 +85,6 @@ def logout_user(request):
 
 def redirect_logout(request):
     return HttpResponseRedirect('/auth/loggedout.html')
+
+def classes(request):
+    return render_to_response('classes.html')
