@@ -1,7 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">GOODBYE!</span>
+                        <hr class="star-light">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 <body>
-<p>My Content</p>    
-	<div>
-		You are logged out! Bye-bye!!
-	</div>
-	<a href="/auth/login.html">login</a>
+<section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+                    <div>
+                        You are logged out! Bye-bye!!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>    
 </body>
+{% endblock %}

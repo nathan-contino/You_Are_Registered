@@ -1,18 +1,41 @@
-<body>
-<p>My Content</p>
-	<div>
-		{{full_name}}, you are logged in! Welcome!
-	</div>
-	<a href="/auth/loggedout.html">logout</a>
-	<h2> Pick your classes! </h2>
-	<form action='/auth/loggedin.html' method='post'>
-	{% csrf_token %}
-	{{ form.as_p }}
-	<input type='submit' value='Submit' />
-	</form>
-	{% if addMessage %}
-    {{ 'Submitted Form!' }}
-	{% endif %}
+{% extends "base.html" %}
 
-<a href="/auth/schedule.html">View Schedule</a>
+{% block content %}
+<header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">HOME</span>
+                        <hr class="star-light">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+<body>
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Welcome, {{full_name}}</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+				<h2> Pick your classes! </h2>
+				<form action='/auth/loggedin.html' method='post'>
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type='submit' value='Submit' />
+				</form>
+				{% if addMessage %}
+    			{{ 'Submitted Form!' }}
+				{% endif %}
+				</div>
+            </div>
+        </div>
+    </section>
 </body>
+{% endblock %}

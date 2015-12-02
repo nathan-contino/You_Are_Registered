@@ -1,21 +1,46 @@
-<h1> My Schedule </h1>
-<table>
-<tr>
-  <th>Course Title</th>
-  <th>Time</th>
-  <th>Room</th>
-  <th>Professor</th>
-  <th>Enrolled Students</th>
-</tr>
-{% for c in courses %}
-<tr>
-  <th>  {{ c.0 }}  </th>
-  <th>  {{ c.1 }}</th>
-  <th> {{ c.2 }}</th>
-  <th> {{ c.3 }}</th>
-  <th> {{ c.4 }}</th>
-</tr>
-{% endfor %}
-</table>
+{% extends "base.html" %}
 
-<p><a href="/auth/loggedin.html">Back to Registration!</a></p>
+{% block content %}
+<header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">MY SCHEDULE</span>
+                        <hr class="star-light">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2">
+        <table>
+            <tr>
+              <th>Course Title</th>
+              <th>Time</th>
+              <th>Room</th>
+              <th>Professor</th>
+              <th>Enrolled Students</th>
+            </tr>
+            {% for c in courses %}
+            <tr>
+              <th>  {{ c.0 }}  </th>
+              <th>  {{ c.1 }}</th>
+              <th> {{ c.2 }}</th>
+              <th> {{ c.3 }}</th>
+              <th> {{ c.4 }}</th>
+            </tr>
+            {% endfor %}
+            </table>
+        </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
