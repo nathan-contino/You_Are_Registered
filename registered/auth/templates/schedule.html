@@ -1,0 +1,21 @@
+<h1> My Schedule </h1>
+<table>
+<tr>
+  <th>Course Title</th>
+  <th>Time</th>
+  <th>Room</th>
+  <th>Professor</th>
+  <th>Enrolled Students</th>
+</tr>
+{% for c in courses %}
+<tr>
+  <th>  {{ c.0 }}  </th>
+  <th>  {{ c.1 }}</th>
+  <th> {{ c.2 }}</th>
+  <th> {{ c.3 }}</th>
+  <th> {{ c.4 }}</th>
+</tr>
+{% endfor %}
+</table>
+
+<p><a href="/auth/loggedin.html">Back to Registration!</a></p>

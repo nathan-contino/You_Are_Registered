@@ -11,3 +11,6 @@ class LoginForm(forms.Form):
 
 class RegistrationForm(forms.Form):
     csc210 = forms.BooleanField(required=False)
+    csc171 = forms.BooleanField(required=False)
+    csc172 = forms.BooleanField(required=False)
+    csc173 = forms.BooleanField(required=False)

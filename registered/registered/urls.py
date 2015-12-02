@@ -25,5 +25,6 @@ urlpatterns = [
      url(r'^auth/createsuccess.html', 'auth.views.createsuccess'),
      url(r'^auth/invalid.html', 'auth.views.invalidusername'),
      url(r'^auth/nologin.html', 'auth.views.logout_user'),
+     url(r'^auth/schedule.html', 'auth.views.schedule'),
      url(r'^','auth.views.login_user'),
 ]
