@@ -8,7 +8,8 @@ from django.shortcuts import render_to_response
 csc210C = ["CSC 210", "MWF 9:00-9:50", "DEWEY 1101", "GUO", 0]
 csc171C = ["CSC 171", "MW 12:30-1:45", "MEL 101", "FERGUSON", 0]
 csc172C = ["CSC 172", "TR 9:40-10:55", "B&L 203", "PAWLICKI", 0]
-csc173C = ["CSC 173", "MW 2:00-3:15", "HOYT AUD", "SEIFERES", 0]
+csc173C = ["CSC 173", "MW 2:00-3:15", "HOYT AUD", "SEIFERAS", 0]
+allClasses = [csc210C, csc171C, csc172C, csc173C]
 
 
 def create_user(request):
@@ -64,7 +65,7 @@ def login_user(request):
 
 
 def loginpage(request):
-    if request.user is not None:
+    if len(request.user.username) > 0:
         if request.method == 'GET':
             registeredCourses = request.user.classes.split(" ")
             csc210Bool = False
@@ -115,39 +116,47 @@ def loginpage(request):
         return render(request, 'loggedin.html',
             {'full_name': request.user.username,
             'form': form,
-            'addMessage': addMessage})
+            'addMessage': addMessage,
+            'courses': allClasses})
     return render_to_response('nologin.html')
 
 
 def logout_user(request):
-    logout(request)
-    return render(request, 'loggedout.html')
+    if len(request.user.username) > 0:
+        logout(request)
+        return render(request, 'loggedout.html')
+    else:
+       return render_to_response('nologin.html')
 
 def redirect_logout(request):
     return HttpResponseRedirect('/auth/loggedout.html')
 
 def schedule(request):
-    count = courseCount()
-    if len(count) > 3:
-        csc210C[4]=count[0]
-        csc171C[4]=count[1]
-        csc172C[4]=count[2]
-        csc173C[4]=count[3]
-    registeredCourses = request.user.classes.split(" ")
-    courses =[]
-    if len(registeredCourses) > 3 :
-        if registeredCourses[0] == "1":
-            courses.append(csc210C)
-        if registeredCourses[1] == "1":
-            courses.append(csc171C)
-        if registeredCourses[2] == "1":
-            courses.append(csc172C)
-        if registeredCourses[3] == "1":
-            courses.append(csc173C)
-    print courses
-    return render(request, 'schedule.html',
-        {'size':len(courses),
-        'courses': courses})
+    if len(request.user.username) > 0:
+        count = courseCount()
+        if len(count) > 3:
+            csc210C[4]=count[0]
+            csc171C[4]=count[1]
+            csc172C[4]=count[2]
+            csc173C[4]=count[3]
+        registeredCourses = request.user.classes.split(" ")
+        courses =[]
+        if len(registeredCourses) > 3 :
+            if registeredCourses[0] == "1":
+                courses.append(csc210C)
+            if registeredCourses[1] == "1":
+                courses.append(csc171C)
+            if registeredCourses[2] == "1":
+                courses.append(csc172C)
+            if registeredCourses[3] == "1":
+                courses.append(csc173C)
+        print courses
+        return render(request, 'schedule.html',
+            {'size':len(courses),
+            'courses': courses})
+    else:
+       return render_to_response('nologin.html')
+
 
 
 

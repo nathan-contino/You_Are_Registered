@@ -22,9 +22,9 @@
                     <hr class="star-light">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-				<h2> Pick your classes! </h2>
+            <div class="container-fluid">
+                <div class="col-lg-2 ">
+				<table><th><header2> Pick your classes! </header2></th></table>
 				<form action='/auth/loggedin.html' method='post'>
 				{% csrf_token %}
 				{{ form.as_p }}
@@ -34,6 +34,26 @@
     			{{ 'Submitted Form!' }}
 				{% endif %}
 				</div>
+				<div class="col-lg-2">
+                    <table width = 800px>
+            <tr>
+              <th height = 42px><header2>Course Title</header2></th>
+              <th height = 42px><header2>Time</header2></th>
+              <th height = 42px><header2>Room</header2></th>
+              <th height = 42px><header2>Professor</header2></th>
+              <th height = 42px><header2>Enrolled Students</header2></th>
+            </tr>
+            {% for c in courses %}
+            <tr>
+              <th><p>  {{ c.0 }}  </p></th>
+              <th><p>   {{ c.1 }} </p></th>
+              <th><p>  {{ c.2 }} </p></th>
+              <th><p>  {{ c.3 }} </p></th>
+              <th><p>  {{ c.4 }} </p></th>
+            </tr>
+            {% endfor %}
+            </table>
+                </div>
             </div>
         </div>
     </section>

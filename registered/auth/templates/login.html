@@ -23,14 +23,21 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2">
+                <bigspace></bigspace>
 				<form action='/auth/login.html' method='post'>{% csrf_token %}
 					{{ form.as_p }}
 					<input type='submit' value='Submit' />
 					</form>
 						<div>
-							<a href="/auth/create_account.html">create an account</a>
+                        <endblock/>
+							<a href="/auth/create_account.html">CREATE AN ACCOUNT</a>
 						</div>
 				</div>
+				<div class="col-lg-4">
+                    <p><font size="4px">Have ever you been let down by slow, unresponsive, unstable registration sites? Studies show that over 99% of University of Rochester students have experienced a bad registration system. </font></p>
+
+                    <p><font size="4px">Streamlined. Efficient. Clean. Friendly. Registrationy. Intelligent. Fast. Responsive. Synergy. Intuitive. Easy, breezy, beautiful. All of these adjectives could be used to describe <font color="white">YOU ARE REGISTERED</font> someday. Sign up today, and <font color="white">YOU ARE REGISTERED</font>!</font></p>
+                </div>
             </div>
         </div>
     </section>

@@ -16,31 +16,31 @@
     <section class="success" id="about">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
+                
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-        <table>
+        <table width = 1500px>
             <tr>
-              <th>Course Title</th>
-              <th>Time</th>
-              <th>Room</th>
-              <th>Professor</th>
-              <th>Enrolled Students</th>
+              <th><header>Course Title</header></th>
+              <th><header>Time</header></th>
+              <th><header>Room</header></th>
+              <th><header>Professor</header></th>
+              <th><header>Enrolled Students</header></th>
             </tr>
             {% for c in courses %}
             <tr>
-              <th>  {{ c.0 }}  </th>
-              <th>  {{ c.1 }}</th>
-              <th> {{ c.2 }}</th>
-              <th> {{ c.3 }}</th>
-              <th> {{ c.4 }}</th>
+              <th><center>  {{ c.0 }}  </center></th>
+              <th><center>   {{ c.1 }}</center></th>
+              <th><center>  {{ c.2 }}</center></th>
+              <th><center>  {{ c.3 }}</center></th>
+              <th><center>  {{ c.4 }}</center></th>
             </tr>
             {% endfor %}
             </table>
-        </div>
-            </div>
+            
         </div>
     </section>
+    <section class="success" id="about"> </section>
+
 {% endblock %}

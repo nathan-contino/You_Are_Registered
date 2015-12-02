@@ -7,7 +7,7 @@ class CreateUserForm(forms.Form):
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=200,required=True)
-    password = forms.CharField(max_length=200,required=True)
+    password = forms.CharField(max_length=200,required=True, widget=forms.PasswordInput())
 
 class RegistrationForm(forms.Form):
     csc210 = forms.BooleanField(required=False)
