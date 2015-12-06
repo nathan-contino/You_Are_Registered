@@ -38,6 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'auth2'
+
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,7 +60,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'auth/templates/',
+            'auth2/templates/',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -106,4 +109,4 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = ( '/Users/WinterMute/Documents/CSC 210/You_Are_Registered/static', )#(os.path.dirname(os.path.realpath(__file__)))#
+STATICFILES_DIRS = ( '/Users/kevingerami/Desktop/2015-Fall/CSC210/git/You_Are_Registered/static', )#(os.path.dirname(os.path.realpath(__file__)))#

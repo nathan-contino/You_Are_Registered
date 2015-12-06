@@ -19,13 +19,13 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-     url(r'^auth/create_account.html','auth.views.create_user', name='create_user'),
-     url(r'^auth/login.html','auth.views.login_user', name='login'),
-     url(r'^auth/loggedin.html', 'auth.views.loginpage'),
-     url(r'^auth/loggedout.html', 'auth.views.logout_user'),
-     url(r'^auth/createsuccess.html', 'auth.views.createsuccess'),
-     url(r'^auth/invalid.html', 'auth.views.invalidusername'),
-     url(r'^auth/nologin.html', 'auth.views.logout_user'),
-     url(r'^auth/schedule.html', 'auth.views.schedule'),
-     url(r'^','auth.views.login_user'),
+     url(r'^auth2/create_account.html','auth2.views.create_user', name='create_user'),
+     url(r'^auth2/login.html','auth2.views.login_user', name='login'),
+     url(r'^auth2/loggedin.html', 'auth2.views.loginpage'),
+     url(r'^auth2/loggedout.html', 'auth2.views.logout_user'),
+     url(r'^auth2/createsuccess.html', 'auth2.views.createsuccess'),
+     url(r'^auth2/invalid.html', 'auth2.views.invalidusername'),
+     url(r'^auth2/nologin.html', 'auth2.views.logout_user'),
+     url(r'^auth2/schedule.html', 'auth2.views.schedule'),
+     url(r'^','auth2.views.login_user'),
 ]
