@@ -109,4 +109,4 @@ STATIC_ROOT = ''
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = ( '/Users/kevingerami/Desktop/2015-Fall/CSC210/git/You_Are_Registered/static', )#(os.path.dirname(os.path.realpath(__file__)))#
+STATICFILES_DIRS = ( '/Users/WinterMute/Documents/CSC 210/You_Are_Registered/static', )#(os.path.dirname(os.path.realpath(__file__)))#

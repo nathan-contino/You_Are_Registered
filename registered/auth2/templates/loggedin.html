@@ -22,35 +22,77 @@
                     <hr class="star-light">
                 </div>
             </div>
-            <div class="container-fluid">
+            <div class="row">
                 <div class="col-lg-2 ">
-				<table><th><header2> Pick your classes! </header2></th></table>
-				<form action='/auth2/loggedin.html' method='post'>
-				{% csrf_token %}
-				{{ form.as_p }}
-				<input type='submit' value='Submit' />
-				</form>
-				{% if addMessage %}
-    			{{ 'Submitted Form!' }}
-				{% endif %}
+				
 				</div>
-				<div class="col-lg-2">
-                    <table width = 800px>
+				<div class="col-lg-12 text-center">
+                    <table width = 1200px border = "1">
             <tr>
-              <th height = 42px><header2>Course Title</header2></th>
-              <th height = 42px><header2>Time</header2></th>
-              <th height = 42px><header2>Room</header2></th>
-              <th height = 42px><header2>Professor</header2></th>
-              <th height = 42px><header2>Enrolled Students</header2></th>
+              <th><header2></header2></th>
+              <th><header2>CRN</header2></th>
+              <th><header2>Course Title</header2></th>
+              <th><header2>Time</header2></th>
+              <th><header2>Building</header2></th>
+              <th><header2>Room</header2></th>
+              <th><header2>Professor</header2></th>
+              <th><header2>Enrolled Students</header2></th>
             </tr>
             {% for c in courses %}
             <tr>
-              <th><p>  {{ c.0 }}  </p></th>
-              <th><p>   {{ c.1 }} </p></th>
-              <th><p>  {{ c.2 }} </p></th>
-              <th><p>  {{ c.3 }} </p></th>
-              <th><p>  {{ c.4 }} </p></th>
+              <th><p> 
+              <button type="submit" class="btn btn-success btn-lg" id="registerButton_{{ c.crn }}">REGISTER!</button>
+              </p> </th>
+              <th id="registerCRN_{{ c.crn }}"><p> {{ c.crn }} </p></th>
+              <th><p>  {{ c.title }}  </p></th>
+              <th width=120px><p>  {{ c.start }} - {{c.end}}  </p></th>
+              <th><p> {{ c.building }} </p></th>
+              <th align="center"><p>  {{ c.room }}  </p></th>
+              <th><p>  {{ c.prof }}  </p></th>
+              <th><p>  {{ c.cap }}  </p></th>
             </tr>
+            <script>
+              $("#registerButton_{{ c.crn }}").click(function() {
+                  var nameToLookup = $("#registerCRN_{{ c.crn }}").val();
+                  console.log(nameToLookup);
+
+                  // From: http://learn.jquery.com/ajax/jquery-ajax-methods/
+                  // Using the core $.ajax() method
+                  $.ajax({
+                    // The URL for the request
+                    url: "addclass",
+
+                    // The data to send (will be converted to a query string)
+                    data: {
+                    requested_name: nameToLookup
+                    },
+
+                    // Whether this is a POST or GET request
+                    type: "POST",
+
+                    // The type of data we expect back
+                    //dataType : "text",
+                    dataType : "json",
+
+                    // Code to run if the request succeeds;
+                    // the response is passed to the function
+                    success: function( data ) {
+                      console.log("You received some data!");
+                      console.log(data);
+
+                      console.log(data.numEnrolled);
+
+                      $("#nameDiv").html(data.numEnrolled);
+                    },
+
+                    // Code to run if the request fails
+                    error: function() {
+                      alert( "Sorry, there was a problem!" );
+                    },
+                  });
+
+                });
+              </script>
             {% endfor %}
             </table>
                 </div>
