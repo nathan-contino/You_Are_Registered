@@ -12,6 +12,40 @@ csc172C = ["CSC 172", "TR 9:40-10:55", "B&L 203", "PAWLICKI", 0]
 csc173C = ["CSC 173", "MW 2:00-3:15", "HOYT AUD", "SEIFERAS", 0]
 allClasses = [csc210C, csc171C, csc172C, csc173C]
 
+def addclass(request):
+    print "help"
+    delete = 0
+    crn = request.GET.get("crn")
+    registeredCourses = request.user.classes.split(" ")
+    crns = request.user.classes
+    if crns == "":
+        crns = crn
+    else:
+        if crn in registeredCourses:
+            registeredCourses.remove(crn)
+            newCourse = ""
+            delete = 1
+            for i in range(len(registeredCourses)):
+                if i == 0:
+                    newCourse = registeredCourses[0]
+                else:
+                    newCourse = newCourse + " " + registeredCourses[i]
+            
+                crns = newCourse
+        else:
+            crns = crns + " " + crn
+    request.user.classes = crns
+    request.user.save()
+    course2 = Courses.objects.filter(crn=crn)
+    if len(course2) > 0:
+        course = course2[0]
+        if delete > 0:
+            course.current = int(course.current) - 1
+        else:
+            course.current = int(course.current) + 1
+        course.save()
+    return HttpResponse("Done!")
+
 
 def create_user(request):
     if request.method == 'GET':
@@ -72,7 +106,6 @@ def loginpage(request):
             registeredCourses = request.user.classes.split(" ")
             form = RegistrationForm()
             for crn2 in registeredCourses:
-                print crn2
                 course2 = Courses.objects.filter(crn=crn2)
                 if len(course2) > 0:
                     course = course2[0]
@@ -222,3 +255,4 @@ def courseCount() :
                 csc173 += 1
     arryNums = [csc210, csc171, csc172, csc173]
     return arryNums
+
