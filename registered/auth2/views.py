@@ -137,22 +137,6 @@ def loginpage(request):
                     course = course2[0]
                     regCourses.append(course)
                     form.fields['%s %s %s-%s %s %s %s' % (course.crsnum, course.title, course.start, course.end, course.building, course.room, course.prof)].initial = True
-
-
-            # csc210Bool = False
-            # csc171Bool = False
-            # csc172Bool = False
-            # csc173Bool = False
-            # if len(registeredCourses) > 3 :
-            #     if registeredCourses[0] == "1":
-            #         csc210Bool = True
-            #     if registeredCourses[1] == "1":
-            #         csc171Bool = True
-            #     if registeredCourses[2] == "1":
-            #         csc172Bool = True
-            #     if registeredCourses[3] == "1":
-            #         csc173Bool = True
-            # form = RegistrationForm(initial={"csc210": csc210Bool, "csc171": csc171Bool,"csc172": csc172Bool, "csc173": csc173Bool})
             addMessage = False
 
         else:
@@ -170,40 +154,13 @@ def loginpage(request):
                             crns = crns+" %s" % allClasses[i].crn
             request.user.classes = crns
             request.user.save()
-
-
-
-
-                # courseString = ""
-                # takingcourse = form.cleaned_data['csc210']
-                # if takingcourse:
-                #     courseString += "1"
-                # else:
-                #     courseString += "0"
-                # takingcourse2 = form.cleaned_data['csc171']
-                # if takingcourse2:
-                #     courseString += " 1"
-                # else:
-                #     courseString += " 0"
-                # takingcourse3 = form.cleaned_data['csc172']
-                # if takingcourse3:
-                #     courseString += " 1"
-                # else:
-                #     courseString += " 0"
-                # takingcourse4 = form.cleaned_data['csc173']
-                # if takingcourse4:
-                #     courseString += " 1"
-                # else:
-                #     courseString += " 0"
-                # request.user.classes = courseString
-                # request.user.save()
             return HttpResponseRedirect('/auth2/schedule.html')
 
         return render(request, 'loggedin.html',
             {'full_name': request.user.username,
             'form': form,
             'addMessage': addMessage,
-            'courses': allClasses,
+            'courses': regCourses,
             'regCourses': regCourses})
     return render_to_response('nologin.html')
 
