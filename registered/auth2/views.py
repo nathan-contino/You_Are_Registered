@@ -41,6 +41,7 @@ def addclass(request):
     delete = 0
     crn = request.GET.get("crn")
     registeredCourses = request.user.classes.split(" ")
+    print registeredCourses
     crns = request.user.classes
     if crns == "":
         crns = crn
@@ -55,7 +56,7 @@ def addclass(request):
                 else:
                     newCourse = newCourse + " " + registeredCourses[i]
 
-                crns = newCourse
+            crns = newCourse
         else:
             crns = crns + " " + crn
     request.user.classes = crns
