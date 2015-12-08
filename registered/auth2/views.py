@@ -220,20 +220,21 @@ def redirect_logout(request):
 def schedule(request):
 
 
-
-    registeredCourses = request.user.classes.split(" ")
-    courses =[]
-    for crn2 in registeredCourses:
-        course2 = Courses.objects.filter(crn=crn2)
-        if len(course2) > 0:
-            course = course2[0]
-            t = course.title
-            d = course.day + " " + course.start + "-" + course.end
-            b = course.building + " " + course.room
-            p = course.prof
-            c = course.current
-            cList = [t,d,b,p,c]
-            courses.append(cList)
+    if len(request.user.username) > 0:
+        registeredCourses = request.user.classes.split(" ")
+        courses = []
+        for crn2 in registeredCourses:
+            print crn2
+            course2 = Courses.objects.filter(crn=crn2)
+            if len(course2) > 0:
+                course = course2[0]
+                t = course.title
+                d = course.day + " " + course.start + "-" + course.end
+                b = course.building + " " + course.room
+                p = course.prof
+                c = course.current
+                cList = [t,d,b,p,c]
+                courses.append(cList)
 
     # if len(request.user.username) > 0:
     #     count = courseCount()
