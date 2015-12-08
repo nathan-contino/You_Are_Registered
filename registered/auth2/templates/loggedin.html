@@ -129,9 +129,10 @@
             </tr>
             {% for c in courses %}
             <tr>
-              <th width = 150px><p>
+              <th height = 70px><p>
               {% if c in regCourses %}
-                  <button type="submit" style="background-color:#F00"" class="btn btn-success btn-lg" id="registerButton_{{ c.crn }}">UNREGISTER!</button>
+                  <button type="submit" style="background-color:#F00" class="btn btn-success btn-lg" id="registerButton_{{ c.crn }}">UNREGISTER!</button>
+                  <script> $("#registerButton_{{ c.crn }}").css({"font-size":"14"}); </script>
               {% else %}
                   <button type="submit" class="btn btn-success btn-lg" id="registerButton_{{ c.crn }}">REGISTER!</button>
               {% endif %}
@@ -182,8 +183,9 @@
                         else {
                           inc = 1;
                         }
-                        $("#registerCur_{{ c.crn }}").html( {{ c.current }} + inc);
+                        $("#registerCur_{{ c.crn }}").html("<p>" + ({{ c.current }} + inc) + "</p>");
                         $("#registerButton_{{ c.crn }}").html("UNREGISTER!");
+                        $("#registerButton_{{ c.crn }}").css({"font-size":"14"});
                         $("#registerButton_{{ c.crn }}").css({"background-color":"#F00"});
                       }
                       else {
@@ -193,8 +195,9 @@
                         else {
                           dec = 0;
                         }
-                        $("#registerCur_{{ c.crn }}").html( {{ c.current }} - dec);
+                        $("#registerCur_{{ c.crn }}").html("<p>" + ({{ c.current }} - dec) + "</p>");
                         $("#registerButton_{{ c.crn }}").html("REGISTER!");
+                        $("#registerButton_{{ c.crn }}").css({"font-size":"18"});
                         $("#registerButton_{{ c.crn }}").css({"background-color":"#5cb85c"});
                       }
                     },
