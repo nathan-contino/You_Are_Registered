@@ -28,5 +28,6 @@ urlpatterns = [
      url(r'^auth2/nologin.html', 'auth2.views.logout_user'),
      url(r'^auth2/schedule.html', 'auth2.views.schedule'),
      url(r'^auth2/addclass.html', 'auth2.views.addclass', name='crn'),
+     url(r'^auth2/search.html', 'auth2.views.searchClasses', name='searchTopic'),
      url(r'^','auth2.views.login_user'),
 ]

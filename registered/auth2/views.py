@@ -1,9 +1,11 @@
+# search filter multiple queries help: http://stackoverflow.com/questions/5445174/or-operator-in-django-model-queries
 from django.shortcuts import render
 from .forms import CreateUserForm, LoginForm, RegistrationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
+from django.db.models import Q
 from models import Courses
 
 csc210C = ["CSC 210", "MWF 9:00-9:50", "DEWEY 1101", "GUO", 0]
@@ -12,8 +14,30 @@ csc172C = ["CSC 172", "TR 9:40-10:55", "B&L 203", "PAWLICKI", 0]
 csc173C = ["CSC 173", "MW 2:00-3:15", "HOYT AUD", "SEIFERAS", 0]
 allClasses = [csc210C, csc171C, csc172C, csc173C]
 
+def searchClasses(request):
+    registeredCourses = request.user.classes.split(" ")
+    regCourses = []
+    for crn2 in registeredCourses:
+        course2 = Courses.objects.filter(crn=crn2)
+        if len(course2) > 0:
+            course = course2[0]
+            regCourses.append(course)
+    searchTopic = request.GET.get('q')
+    print searchTopic
+    if searchTopic is not None:
+        courses = Courses.objects.filter(Q(title__icontains=searchTopic) |
+                               Q(crsnum__icontains=searchTopic) |
+                               Q(prof__icontains=searchTopic))
+    else:
+        courses = Courses.objects.all()
+    return render(request, 'loggedin.html',
+    {'full_name': request.user.username,
+    'form': "none",
+    'addMessage': "none",
+    'courses': courses,
+    'regCourses':regCourses})
+
 def addclass(request):
-    print "help"
     delete = 0
     crn = request.GET.get("crn")
     registeredCourses = request.user.classes.split(" ")
@@ -30,7 +54,7 @@ def addclass(request):
                     newCourse = registeredCourses[0]
                 else:
                     newCourse = newCourse + " " + registeredCourses[i]
-            
+
                 crns = newCourse
         else:
             crns = crns + " " + crn
@@ -105,10 +129,12 @@ def loginpage(request):
             allClasses = Courses.objects.all()
             registeredCourses = request.user.classes.split(" ")
             form = RegistrationForm()
+            regCourses = []
             for crn2 in registeredCourses:
                 course2 = Courses.objects.filter(crn=crn2)
                 if len(course2) > 0:
                     course = course2[0]
+                    regCourses.append(course)
                     form.fields['%s %s %s-%s %s %s %s' % (course.crsnum, course.title, course.start, course.end, course.building, course.room, course.prof)].initial = True
 
 
@@ -176,7 +202,8 @@ def loginpage(request):
             {'full_name': request.user.username,
             'form': form,
             'addMessage': addMessage,
-            'courses': allClasses})
+            'courses': allClasses,
+            'regCourses': regCourses})
     return render_to_response('nologin.html')
 
 
@@ -255,4 +282,3 @@ def courseCount() :
                 csc173 += 1
     arryNums = [csc210, csc171, csc172, csc173]
     return arryNums
-
